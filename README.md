@@ -1,3 +1,5 @@
+# URL de la aplicación: https://georgecore-maker.github.io/meal-finder/
+
 # Meal Finder
 
 Aplicación web para buscar y explorar recetas de comidas utilizando la API pública de [TheMealDB](https://www.themealdb.com/).
