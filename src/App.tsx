@@ -8,6 +8,8 @@ import useHttpData from "./hooks/UseHttpData";
 import axios from "axios";
 import RecipeModal from './components/RecipeModal';
 import useFetch from "./hooks/UseFetch";
+import { useLanguage } from "./contexts/LanguageContext";
+import { translationService } from "./services/translationService";
 
 
 const baseUrl = "https://www.themealdb.com/api/json/v1/1";
@@ -15,16 +17,23 @@ const url = `${baseUrl}/list.php?c=list`;
 const makeMealUrl = (category: Category) => `${baseUrl}/filter.php?c=${category.strCategory}`;
 function App() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { language } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState<Category>({ strCategory: 'Beef' });
   const { loading, data } = useHttpData<Category>(url);
   const { loading: loadingMeal, data: dataMeal, setData: setMeal, setLoading: setLoadingMeal } = useHttpData<Meal>(makeMealUrl(selectedCategory));
 
-  const searchApi = (searchForm: SearchForm) => {
+  const searchApi = async (searchForm: SearchForm) => {
+    // Traducir el término de búsqueda a inglés si el usuario está en español
+    let searchTerm = searchForm.search;
+    if (language === 'es') {
+      searchTerm = await translationService.translateToEnglish(searchForm.search);
+    }
+
     const endpoints: Record<SearchForm['searchType'], string> = {
-      name: `${baseUrl}/search.php?s=${searchForm.search}`,
-      ingredient: `${baseUrl}/filter.php?i=${searchForm.search}`,
-      category: `${baseUrl}/filter.php?c=${searchForm.search}`,
-      area: `${baseUrl}/filter.php?a=${searchForm.search}`,
+      name: `${baseUrl}/search.php?s=${searchTerm}`,
+      ingredient: `${baseUrl}/filter.php?i=${searchTerm}`,
+      category: `${baseUrl}/filter.php?c=${searchTerm}`,
+      area: `${baseUrl}/filter.php?a=${searchTerm}`,
     };
     const url = endpoints[searchForm.searchType];
     setLoadingMeal(true);

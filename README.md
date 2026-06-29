@@ -20,6 +20,19 @@ Aplicación web para buscar y explorar recetas de comidas utilizando la API púb
 - Búsqueda de recetas por nombre, ingrediente, categoría o área
 - Modal con detalle de la receta: ingredientes, medidas e instrucciones
 - Estado de carga con skeletons
+- **Cambio de idioma entre inglés y español** en toda la interfaz
+- **Traducción automática** de nombres de recetas, ingredientes e instrucciones al cambiar de idioma
+
+## Cambio de Idioma
+
+La aplicación soporta **inglés** y **español**. El selector de idioma se encuentra en la barra superior.
+
+### Cómo funciona
+
+- El contexto `LanguageContext` (en `src/contexts/LanguageContext.tsx`) provee el estado del idioma, una función para cambiarlo y un helper `t()` para traducciones estáticas.
+- Las traducciones de la interfaz (etiquetas, placeholders, botones) se manejan con el helper `t('key')` y un diccionario local.
+- Los nombres de recetas, ingredientes e instrucciones se traducen dinámicamente usando `TranslationService` (`src/services/translationService.ts`), que combina un diccionario predefinido con la API de MyMemory para términos no encontrados.
+- El término de búsqueda se traduce automáticamente a inglés si el usuario está en español, para mantener compatibilidad con la API de TheMealDB.
 
 ## API Consumida
 
@@ -39,22 +52,26 @@ Aplicación web para buscar y explorar recetas de comidas utilizando la API púb
 ```
 src/
 ├── components/
-│   ├── Header.tsx          — Barra superior con buscador
-│   ├── SideNav.tsx         — Navegación lateral de categorías
-│   ├── MainContent.tsx     — Grid de tarjetas de comidas
-│   ├── MealCard.tsx        — Tarjeta individual de comida
-│   ├── RecipeModal.tsx     — Modal de detalle de receta
-│   ├── RecipeModalContent.tsx — Contenido del modal
-│   ├── RecipeModalSkeleton.tsx — Skeleton del modal
-│   ├── Categories.tsx      — Lista de categorías
-│   └── SkeletonCard.tsx    — Skeleton de tarjeta
+│   ├── Header.tsx                 — Barra superior con buscador y selector de idioma
+│   ├── SideNav.tsx                — Navegación lateral de categorías
+│   ├── MainContent.tsx            — Grid de tarjetas de comidas
+│   ├── MealCard.tsx               — Tarjeta individual de comida
+│   ├── RecipeModal.tsx            — Modal de detalle de receta
+│   ├── RecipeModalContent.tsx     — Contenido del modal con datos traducidos
+│   ├── RecipeModalSkeleton.tsx    — Skeleton del modal
+│   ├── Categories.tsx             — Lista de categorías
+│   └── SkeletonCard.tsx           — Skeleton de tarjeta
+├── contexts/
+│   └── LanguageContext.tsx         — Contexto de idioma y traducciones
 ├── hooks/
-│   ├── UseHttpData.ts      — Hook para fetch con axios y cleanup
-│   └── UseFetch.ts         — Hook para fetch imperativo
+│   ├── UseHttpData.ts             — Hook para fetch con axios y cleanup
+│   └── UseFetch.ts                — Hook para fetch imperativo
+├── services/
+│   └── translationService.ts      — Servicio de traducción (diccionario + API MyMemory)
 ├── types/
-│   └── index.ts            — Tipos compartidos (Category, Meal, MealDetails, SearchForm)
-├── App.tsx                 — Componente principal
-└── main.tsx                — Punto de entrada
+│   └── index.ts                   — Tipos compartidos (Category, Meal, MealDetails, SearchForm)
+├── App.tsx                        — Componente principal
+└── main.tsx                       — Punto de entrada
 ```
 
 ## Instalación y uso
