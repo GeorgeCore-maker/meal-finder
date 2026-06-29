@@ -1,8 +1,4 @@
-import React from 'react'
-
-type Props = {}
-
-function Categories({}: Props) {
+function Categories() {
   return (
     <div>Categories</div>
   )
