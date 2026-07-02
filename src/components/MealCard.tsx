@@ -45,9 +45,9 @@ function MealCard({ meal, openRecipe }: Props) {
           </Text>
         </CardBody>
         <Divider />
-        <CardFooter>
+        <CardFooter justifyContent="center">
           <ButtonGroup spacing='2'>
-            <Button onClick={openRecipe} variant='solid' color="white" bg="blue.400" _hover={{ bg: 'blue.500' }}>
+            <Button  justifySelf='flex-end' onClick={openRecipe} variant='solid' color="white" bg="blue.400" _hover={{ bg: 'blue.600' }}>
               {t('recipe.viewRecipe')}
             </Button>
           </ButtonGroup>
