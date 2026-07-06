@@ -8,7 +8,7 @@ import useHttpData from "./hooks/UseHttpData";
 import axios from "axios";
 import RecipeModal from './components/RecipeModal';
 import useFetch from "./hooks/UseFetch";
-import { useLanguage } from "./contexts/LanguageContext";
+import { useLanguage } from "./contexts/useLanguage";
 import { translationService } from "./services/translationService";
 
 

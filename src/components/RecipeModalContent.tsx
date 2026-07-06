@@ -1,6 +1,6 @@
 import { ModalBody, ModalCloseButton, ModalHeader, Image, Heading, Text, OrderedList, ListItem, Spinner, Box } from '@chakra-ui/react';
 import { MealDetails } from '../types';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../contexts/useLanguage';
 import { useEffect, useState } from 'react';
 import { translationService } from '../services/translationService';
 

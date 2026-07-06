@@ -2,7 +2,7 @@ import { Button, Container, Flex, Input, InputGroup, InputLeftElement, Select } 
 import { useForm } from 'react-hook-form';
 import { FaSearch } from 'react-icons/fa'
 import { SearchForm } from "../types";
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../contexts/useLanguage';
 
 type Props = {
   onsubmit: (data: SearchForm) => void;

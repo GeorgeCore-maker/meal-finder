@@ -1,6 +1,6 @@
 import { Heading, Link, SkeletonText, VStack } from "@chakra-ui/react";
 import { Category } from "../types";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "../contexts/useLanguage";
 import { useEffect, useState } from "react";
 import { translationService } from "../services/translationService";
 
